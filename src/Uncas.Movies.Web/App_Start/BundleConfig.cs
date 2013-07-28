@@ -20,8 +20,11 @@ namespace Uncas.Movies.Web
             bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
                 "~/Scripts/knockout-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/ajaxlogin").Include(
-                "~/Scripts/app/ajaxlogin.js"));
+            bundles.Add(new ScriptBundle("~/bundles/movies").Include(
+                "~/Scripts/app/movies.bindings.js",
+                "~/Scripts/app/movies.datacontext.js",
+                "~/Scripts/app/movies.model.js",
+                "~/Scripts/app/movies.viewmodel.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

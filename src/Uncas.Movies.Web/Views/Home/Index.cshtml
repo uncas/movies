@@ -7,5 +7,17 @@
 </header>
 
 <div id="main-content">
-    TODO
+    <section id="moves" data-bind="foreach: movies, visible: movies().length > 0">
+        <article class="movie">
+            <header>
+                <p data-bind="text: title"></p>
+            </header>
+        </article>
+    </section>
 </div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/movies")
+}
