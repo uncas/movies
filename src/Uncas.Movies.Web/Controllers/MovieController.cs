@@ -11,7 +11,13 @@ namespace Uncas.Movies.Web.Controllers
         {
             return new[]
                 {
-                    new MovieDto {MovieId = 1, Title = "Red"},
+                    new MovieDto
+                        {
+                            MovieId = 1,
+                            Title = "Red",
+                            ImdbUrl = "http://www.imdb.com/title/tt0111495/",
+                            ShowUrl = "http://www.paradisbio.dk"
+                        },
                     new MovieDto {MovieId = 2, Title = "Blue"},
                     new MovieDto {MovieId = 3, Title = "White"}
                 };

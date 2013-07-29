@@ -7,6 +7,8 @@
 
         self.movieId = data.movieId;
         self.title = data.title;
+        self.imdbUrl = data.imdbUrl;
+        self.showUrl = data.showUrl;
 
         self.toJson = function() { return ko.toJSON(self); };
     }

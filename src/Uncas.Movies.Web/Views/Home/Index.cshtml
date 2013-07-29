@@ -12,6 +12,8 @@
             <header>
                 <p data-bind="text: title"></p>
             </header>
+            <a data-bind="visible: showUrl, attr: { href: showUrl }">View at cinema's website</a>
+            <a data-bind="visible: imdbUrl, attr: { href: imdbUrl }">View at IMDB</a>
         </article>
     </section>
 </div>
