@@ -14,7 +14,7 @@ window.moviesApp.datacontext = (function() {
             .fail(getFailed);
 
         function getSucceeded(data) {
-            var mappedMovies = $.map(data, function (list) { return new createMovie(list); });
+            var mappedMovies = $.map(data, function(list) { return new createMovie(list); });
             moviesObservable(mappedMovies);
         }
 
@@ -46,8 +46,8 @@ window.moviesApp.datacontext = (function() {
         return $.ajax(url, options);
     }
 
-// routes
+    // routes
 
-    function moviesUrl(id) { return "/api/movie/" + (id || ""); }
+    function moviesUrl() { return "/api/movie/"; }
 
 })();
