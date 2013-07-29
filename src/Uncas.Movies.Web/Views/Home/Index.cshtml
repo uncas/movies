@@ -7,12 +7,15 @@
 </header>
 
 <div id="main-content">
-    <section id="moves" data-bind="foreach: movies, visible: movies().length > 0">
+    <section id="movies" data-bind="foreach: movies, visible: movies().length > 0">
         <article class="movie">
             <header>
                 <p data-bind="text: title"></p>
             </header>
-            <a data-bind="visible: showUrl, attr: { href: showUrl }">View at cinema's website</a>
+            <p class="show">
+                <a title="View at cinema's website"
+                   data-bind="attr: { href: showUrl }, visible: showUrl">I dag 14:30</a>
+            </p>
             <a data-bind="visible: imdbUrl, attr: { href: imdbUrl }">View at IMDB</a>
         </article>
     </section>
