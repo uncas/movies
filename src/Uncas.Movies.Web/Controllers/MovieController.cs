@@ -11,15 +11,24 @@ namespace Uncas.Movies.Web.Controllers
         {
             return new[]
                 {
-                    new MovieDto
-                        {
-                            MovieId = 1,
-                            Title = "Red",
-                            ImdbUrl = "http://www.imdb.com/title/tt0111495/",
-                            ShowUrl = "http://www.paradisbio.dk"
-                        },
-                    new MovieDto {MovieId = 2, Title = "Blue"},
-                    new MovieDto {MovieId = 3, Title = "White"}
+                    GetMovieDto(1, "Red"),
+                    GetMovieDto(2, "Blue"),
+                    GetMovieDto(3, "White"),
+                };
+        }
+
+        private static MovieDto GetMovieDto(int id, string title)
+        {
+            return new MovieDto
+                {
+                    MovieId = id,
+                    Title = title,
+                    ImdbUrl = "http://www.imdb.com/title/tt0111495/",
+                    ShowUrl = "http://www.paradisbio.dk",
+                    CinemaUrl = "http://www.paradisbio.dk",
+                    ImdbRating = "7.3",
+                    ShowTime = "I dag 17:30",
+                    ShowLocation = "Øst for Paradis, Århus"
                 };
         }
     }

@@ -1,0 +1,25 @@
+﻿.movie {
+    -moz-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    background-color: #ffd;
+    box-shadow: 10px 10px 9px rgba(0, 0, 0, 0.22);
+    display: inline-block;
+    margin: 1em;
+    min-height: 280px;
+    padding-left: 18px;
+    padding-top: 8px;
+    position: relative;
+    text-align: left;
+    vertical-align: top;
+    width: 260px;
+}
+
+.movie:before {
+    border-color: #f6f6d7 #fff;
+    border-style: solid;
+    border-width: 0 0 24px 24px;
+    content: "";
+    left: 0;
+    position: absolute;
+    top: 0;
+}

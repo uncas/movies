@@ -9,14 +9,17 @@
 <div id="main-content">
     <section id="movies" data-bind="foreach: movies, visible: movies().length > 0">
         <article class="movie">
-            <header>
-                <p data-bind="text: title"></p>
-            </header>
+            <p data-bind="text: title"></p>
             <p class="show">
                 <a title="View at cinema's website"
-                   data-bind="attr: { href: showUrl }, visible: showUrl">I dag 14:30</a>
+                   data-bind="text: showTime, attr: { href: showUrl }, visible: showTime"></a>
             </p>
-            <a data-bind="visible: imdbUrl, attr: { href: imdbUrl }">View at IMDB</a>
+            <p class="cinema">
+                <a title="Go to cinema's website"
+                   data-bind="text: showLocation, attr: { href: cinemaUrl }, visible: showLocation"></a>
+            </p>
+            <a title="View at IMDB"
+               data-bind="text: imdbRating, attr: { href: imdbUrl }, visible: imdbRating"></a>
         </article>
     </section>
 </div>
