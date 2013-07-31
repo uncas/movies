@@ -69,7 +69,7 @@ namespace Uncas.Movies.Tests
             return ExtractShows(html);
         }
 
-        private void AssignDetails(CrawledMovie movie)
+        private void CrawlDetails(CrawledMovie movie)
         {
             string html =
                 CrawlerUtility.Crawl("http://www.paradisbio.dk/" + movie.CrawledMovieUrl);
@@ -101,10 +101,8 @@ namespace Uncas.Movies.Tests
             }
         }
 
-        [Test]
-        public void CrawlEastOfEden()
+        private static List<CrawledMovie> GetCrawledMovies(IEnumerable<CrawledShow> shows)
         {
-            IEnumerable<CrawledShow> shows = ExtractShows();
             List<CrawledMovie> movies =
                 shows.Distinct(new CrawledShowComparer())
                      .Select(
@@ -115,34 +113,45 @@ namespace Uncas.Movies.Tests
                                  CrawledMovieUrl = x.CrawledMovieUrl,
                                  Title = x.ShowTitle
                              }).OrderBy(x => x.CrawledMovieId).ToList();
+            return movies;
+        }
+
+        private readonly GoogleImdbCrawler _googleImdbCrawler = new GoogleImdbCrawler();
+
+        private void CrawlImdbId(CrawledMovie movie)
+        {
+            movie.ImdbId =
+                _googleImdbCrawler.QueryImdbId(movie.OriginalTitle ?? movie.Title);
+        }
+
+        private void CrawlImdbIds(IEnumerable<CrawledMovie> movies)
+        {
+            IEnumerable<CrawledMovie> moviesWithoutImdbId =
+                movies.Where(x => string.IsNullOrWhiteSpace(x.ImdbId));
+            foreach (CrawledMovie movie in moviesWithoutImdbId)
+                CrawlImdbId(movie);
+        }
+
+        private void CrawlDetails(IEnumerable<CrawledMovie> movies)
+        {
             foreach (CrawledMovie movie in movies)
-            {
-                AssignDetails(movie);
-                Console.WriteLine(
-                    "{0}: {1} ({2}, {3})",
-                    movie.CrawledMovieId,
-                    movie.Title,
-                    movie.ImdbId,
-                    movie.OriginalTitle);
-            }
+                CrawlDetails(movie);
+        }
 
-            var googleImdbCrawler = new GoogleImdbCrawler();
-            foreach (
-                CrawledMovie movie in
-                    movies.Where(x => string.IsNullOrWhiteSpace(x.ImdbId)))
-            {
-                movie.ImdbId =
-                    googleImdbCrawler.QueryImdbId(movie.OriginalTitle ?? movie.Title);
-                Console.WriteLine(
-                    "{0}: {1} ({2}, {3})",
-                    movie.CrawledMovieId,
-                    movie.Title,
-                    movie.ImdbId,
-                    movie.OriginalTitle);
-            }
+        private void CrawlImdbDetails(List<CrawledMovie> crawledMovies)
+        {
+            throw new NotImplementedException();
+        }
 
-            Console.WriteLine(shows.Count());
-            Console.WriteLine(movies.Count);
+        [Test]
+        public void CrawlEastOfEden()
+        {
+            // TODO: Consider when to save which data:
+            IEnumerable<CrawledShow> crawledShows = ExtractShows();
+            List<CrawledMovie> crawledMovies = GetCrawledMovies(crawledShows);
+            CrawlDetails(crawledMovies);
+            CrawlImdbIds(crawledMovies);
+            CrawlImdbDetails(crawledMovies);
 
             // TODO: Take only the following 3 days.
             // TODO: Run once per day.
