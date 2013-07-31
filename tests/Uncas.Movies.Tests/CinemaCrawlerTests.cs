@@ -51,7 +51,7 @@ namespace Uncas.Movies.Tests
                     int minutes = int.Parse(timeParts[1]);
                     crawledShows.Add(new CrawledShow
                         {
-                            StartTime = date.AddHours(hours).AddMinutes(minutes),
+                            ShowTime = date.AddHours(hours).AddMinutes(minutes),
                             CrawledMovieId = id,
                             CrawledMovieUrl = url,
                             ShowTitle = title

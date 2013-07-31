@@ -1,16 +1,16 @@
-Cinema
+Cinema (hard-coded)
 	Id
 	Name
 
-CrawledShow
+CrawledShow (in database)
 	CinemaId (UK)
 	CrawledMovieId (UK)
-	StartTime (UK)
+	ShowTime (UK)
 	CrawledMovieUrl
 	ShowTitle
 	CinemaShowId
 
-CrawledMovie
+CrawledMovie (in database)
 	CinemaId (UK)
 	CrawledMovieId (UK)
 	CrawledMovieUrl
@@ -18,7 +18,7 @@ CrawledMovie
 	ImdbId
 	(Year)
 
-Movie
+Movie (in database)
 	Id
 	ImdbId
 	Title
@@ -33,10 +33,16 @@ Movie
 	RuntimeInMinutes
 	ImdbRating
 
-CinemaShow
+CinemaShow (in database)
 	Id
 	CinemaId
 	MovieId
-	StartTime
+	ShowTime
 	ShowUrl
 	ShowTitle
+
+CinemaShowReadModel (in database)
+	CinemaId
+	ImdbRating
+	ShowTime
+	Data
