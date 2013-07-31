@@ -1,0 +1,42 @@
+Cinema
+	Id
+	Name
+
+CrawledShow
+	CinemaId (UK)
+	CrawledMovieId (UK)
+	StartTime (UK)
+	CrawledMovieUrl
+	ShowTitle
+	CinemaShowId
+
+CrawledMovie
+	CinemaId (UK)
+	CrawledMovieId (UK)
+	CrawledMovieUrl
+	OriginalTitle
+	ImdbId
+	(Year)
+
+Movie
+	Id
+	ImdbId
+	Title
+	OriginalTitle
+	Director
+	Year
+	Genres
+	CensorRating
+	PictureUrl
+	PlotLine
+	Actors
+	RuntimeInMinutes
+	ImdbRating
+
+CinemaShow
+	Id
+	CinemaId
+	MovieId
+	StartTime
+	ShowUrl
+	ShowTitle

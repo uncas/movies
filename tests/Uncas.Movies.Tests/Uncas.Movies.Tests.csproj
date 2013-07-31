@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CinemaCrawlerTests.cs" />
+    <Compile Include="CrawledMovie.cs" />
+    <Compile Include="CrawledShow.cs" />
+    <Compile Include="CrawledShowComparer.cs" />
+    <Compile Include="CrawlerUtility.cs" />
+    <Compile Include="GoogleImdbCrawler.cs" />
+    <Compile Include="GoogleImdbCrawlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
