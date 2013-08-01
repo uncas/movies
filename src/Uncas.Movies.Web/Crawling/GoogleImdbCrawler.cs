@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
 
-namespace Uncas.Movies.Tests
+namespace Uncas.Movies.Web.Crawling
 {
     public class GoogleImdbCrawler
     {

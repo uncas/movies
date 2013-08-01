@@ -39,6 +39,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fizzler">
+      <HintPath>..\..\packages\Fizzler.0.9.3\lib\net35\Fizzler.dll</HintPath>
+    </Reference>
+    <Reference Include="Fizzler.Sandbox">
+      <HintPath>..\..\packages\Fizzler.0.9.3\lib\net35\Fizzler.Sandbox.dll</HintPath>
+    </Reference>
+    <Reference Include="Fizzler.Systems.HtmlAgilityPack">
+      <HintPath>..\..\packages\Fizzler.0.9.3\lib\net35\Fizzler.Systems.HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -207,6 +219,15 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
+    <Compile Include="Crawling\CinemaCrawler.cs" />
+    <Compile Include="Crawling\CrawledMovie.cs" />
+    <Compile Include="Crawling\CrawledShow.cs" />
+    <Compile Include="Crawling\CrawledShowComparer.cs" />
+    <Compile Include="Crawling\CrawledShowRepository.cs" />
+    <Compile Include="Crawling\CrawlerUtility.cs" />
+    <Compile Include="Crawling\GoogleImdbCrawler.cs" />
+    <Compile Include="Crawling\ImdbCrawler.cs" />
+    <Compile Include="Crawling\ImdbMovie.cs" />
     <Compile Include="Jobs\MovieJob.cs" />
     <Compile Include="Models\MovieDto.cs" />
     <Compile Include="Filters\ValidateHttpAntiForgeryTokenAttribute.cs" />

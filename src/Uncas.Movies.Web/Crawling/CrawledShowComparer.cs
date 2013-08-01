@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Uncas.Movies.Tests
+namespace Uncas.Movies.Web.Crawling
 {
     public class CrawledShowComparer : IEqualityComparer<CrawledShow>
     {

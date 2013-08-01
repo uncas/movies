@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Uncas.Movies.Tests
+namespace Uncas.Movies.Web.Crawling
 {
     public class CrawledShow
     {

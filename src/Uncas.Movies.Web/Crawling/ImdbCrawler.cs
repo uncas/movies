@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Uncas.Movies.Tests
+namespace Uncas.Movies.Web.Crawling
 {
     public class ImdbCrawler
     {

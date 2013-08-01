@@ -1,7 +1,7 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Uncas.Movies.Tests
+namespace Uncas.Movies.Web.Crawling
 {
     public static class CrawlerUtility
     {

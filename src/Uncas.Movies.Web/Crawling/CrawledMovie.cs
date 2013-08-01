@@ -1,4 +1,4 @@
-﻿namespace Uncas.Movies.Tests
+﻿namespace Uncas.Movies.Web.Crawling
 {
     public class CrawledMovie
     {

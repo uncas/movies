@@ -6,16 +6,19 @@ using System.Text.RegularExpressions;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
 
-namespace Uncas.Movies.Tests
+namespace Uncas.Movies.Web.Crawling
 {
     public class CinemaCrawler
     {
+        private readonly CrawledShowRepository _crawledShowRepository =
+            new CrawledShowRepository();
+
         private readonly GoogleImdbCrawler _googleImdbCrawler = new GoogleImdbCrawler();
 
         public void CrawlCinema()
         {
-            // TODO: Consider when to save which data:
             IEnumerable<CrawledShow> crawledShows = ExtractShows();
+            _crawledShowRepository.Save(crawledShows);
             List<CrawledMovie> crawledMovies = GetCrawledMovies(crawledShows);
             CrawlDetails(crawledMovies);
             CrawlImdbIds(crawledMovies);
