@@ -1,3 +1,5 @@
 /packages/
 bin/
 obj/
+/src/Uncas.Movies.Web/x64/
+/src/Uncas.Movies.Web/x86/

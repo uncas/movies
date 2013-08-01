@@ -1,0 +1,1 @@
+robocopy packages\System.Data.SQLite.1.0.87.0\content\net45 src\Uncas.Movies.Web /S
