@@ -155,17 +155,6 @@ namespace Uncas.Movies.Tests
 
             // TODO: Take only the following 3 days.
             // TODO: Run once per day.
-
-            // Algorithm for 'Øst for Paradis':
-            // Go through shows and record CinemaShow (date, time, movie id, URL to page, display title)
-            // For each distinct CinemaShow where we don't already have the IMDB id
-            //   Follow URL to details page
-            //   Determine the IMDB id:
-            //     If directly on page, then take that!
-            //     Else search on google: <originalTitle> site:www.imdb.com
-            // For each distinct movie where we do not already have details from IMDB:
-            //   http://www.omdbapi.com/?i=tt2106476
-            //   Get details from IMDB: imdbRating, official title, director(s), year, genre, rating, imdbID, pictureUrl, plotLine, Actors, Runtime
         }
     }
 }

@@ -1,8 +1,22 @@
-Cinema (hard-coded)
+Flow, once per day per cinema:
+- Crawl current shows, for a given cinema
+- Delete CrawledShows in database and save current shows to CrawledShows
+- Save new distinct CrawledMovies from CrawledShows
+- Crawl more details and imdb ID for new CrawledMovies
+- Delete CrawledMovies where it was not possible to determine imdb ID
+- Delete CrawledShows without CrawledMovies
+- Crawl and save imdb details for new Movies
+- Delete existing from CinemaShowReadStore and write the current values there
+
+=====
+
+Data structures, in database:
+
+Cinema
 	Id
 	Name
 
-CrawledShow (in database)
+CrawledShow
 	CinemaId (UK)
 	CrawledMovieId (UK)
 	ShowTime (UK)
@@ -10,7 +24,7 @@ CrawledShow (in database)
 	ShowTitle
 	CinemaShowId
 
-CrawledMovie (in database)
+CrawledMovie
 	CinemaId (UK)
 	CrawledMovieId (UK)
 	CrawledMovieUrl
@@ -18,11 +32,11 @@ CrawledMovie (in database)
 	ImdbId
 	(Year)
 
-Movie (in database)
+Movie
 	Id
 	ImdbId
 	Title
-	OriginalTitle
+	(OriginalTitle)
 	Director
 	Year
 	Genres
@@ -33,16 +47,17 @@ Movie (in database)
 	RuntimeInMinutes
 	ImdbRating
 
-CinemaShow (in database)
-	Id
-	CinemaId
-	MovieId
-	ShowTime
-	ShowUrl
-	ShowTitle
-
-CinemaShowReadModel (in database)
-	CinemaId
+CinemaShowReadStore
+	Id (PK)
+	CinemaId (UK)
+	ShowTitle (UK)
+	ShowTime (UK)
 	ImdbRating
-	ShowTime
-	Data
+	ShowLocation
+	ShowUrl
+	CinemaUrl
+	ImdbUrl
+
+CinemaShowGenreReadStore
+	CinemaShowReadStoreId (UK)
+	Genre (UK)
