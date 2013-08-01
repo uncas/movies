@@ -1,6 +1,6 @@
 Flow, once per day per cinema:
 - Crawl current shows, for a given cinema
-- Delete CrawledShows in database and save current shows to CrawledShows
+- Delete CrawledShows from database and save current shows to CrawledShows
 - Save new distinct CrawledMovies from CrawledShows
 - Crawl more details and imdb ID for new CrawledMovies
 - Delete CrawledMovies where it was not possible to determine imdb ID

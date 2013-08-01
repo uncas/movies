@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CinemaCrawler.cs" />
     <Compile Include="CinemaCrawlerTests.cs" />
     <Compile Include="CrawledMovie.cs" />
     <Compile Include="CrawledShow.cs" />
