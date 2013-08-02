@@ -2,12 +2,17 @@
     /// <field name="movies" value="[new datacontext.movies()]"></field>
     var movies = ko.observableArray();
     var error = ko.observable();
-
-    datacontext.getMovies(movies, error); // load movies
+    var search = function() {
+        datacontext.getMovies(movies, error); // load movies
+    };
+    var optionRating = 5;
+    search();
 
     return {
         movies: movies,
-        error: error
+        error: error,
+        search: search,
+        optionRating: optionRating
     };
 
 })(ko, moviesApp.datacontext);

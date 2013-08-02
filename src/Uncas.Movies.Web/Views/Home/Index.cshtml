@@ -7,6 +7,10 @@
 </header>
 
 <div id="main-content">
+    <div id="options">
+        Movies with rating higher than <span class="rating" data-bind="text: optionRating"></span>
+        <button data-bind="click: search">Search</button>
+    </div>
     <section id="movies" data-bind="foreach: movies, visible: movies().length > 0">
         <article class="movie">
             <p data-bind="text: title"></p>
