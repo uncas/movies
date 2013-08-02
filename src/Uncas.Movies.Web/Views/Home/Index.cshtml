@@ -11,7 +11,7 @@
         Movies with rating higher than
         @for (int rating = 5; rating <= 9; rating++)
         {
-            <button class="rating" data-bind="click: function () { chooseRating(@rating); }">@rating</button>
+            <button class="rating" data-bind="click: function () { chooseRating(@rating); }, css: { selectedRating: optionRating() === @rating }">@rating</button>
         }
     </div>
     <section id="movies" data-bind="foreach: movies, visible: movies().length > 0">

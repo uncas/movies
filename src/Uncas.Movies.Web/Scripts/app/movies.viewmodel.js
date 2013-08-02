@@ -1,8 +1,9 @@
 ﻿window.moviesApp.moviesViewModel = (function(ko, datacontext) {
     /// <field name="movies" value="[new datacontext.movies()]"></field>
+    var defaultRating = 7;
     var movies = ko.observableArray();
     var error = ko.observable();
-    var optionRating = ko.observable(6);
+    var optionRating = ko.observable(defaultRating);
 
     var search = function () {
         datacontext.getMovies(movies, error, optionRating());
