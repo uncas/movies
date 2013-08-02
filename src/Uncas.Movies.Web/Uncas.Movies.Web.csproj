@@ -239,6 +239,7 @@
     <Compile Include="Crawling\ImdbMovie.cs" />
     <Compile Include="Crawling\SqLiteBaseRepository.cs" />
     <Compile Include="Jobs\MovieJob.cs" />
+    <Compile Include="Models\CinemaShowReadModel.cs" />
     <Compile Include="Models\MovieDto.cs" />
     <Compile Include="Filters\ValidateHttpAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">

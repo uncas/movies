@@ -8,8 +8,11 @@
 
 <div id="main-content">
     <div id="options">
-        Movies with rating higher than <span class="rating" data-bind="text: optionRating"></span>
-        <button data-bind="click: search">Search</button>
+        Movies with rating higher than
+        @for (int rating = 5; rating <= 9; rating++)
+        {
+            <button class="rating" data-bind="click: function () { chooseRating(@rating); }">@rating</button>
+        }
     </div>
     <section id="movies" data-bind="foreach: movies, visible: movies().length > 0">
         <article class="movie">
