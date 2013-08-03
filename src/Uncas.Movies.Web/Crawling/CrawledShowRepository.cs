@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
+using System.Linq;
 using Dapper;
 
 namespace Uncas.Movies.Web.Crawling
 {
     public class CrawledShowRepository : SqLiteBaseRepository
     {
+        private static List<CrawledShow> _crawledShows;
+
         public CrawledShowRepository()
             : base(Environment.CurrentDirectory + "\\SimpleDb.sqlite")
         {
@@ -15,6 +18,8 @@ namespace Uncas.Movies.Web.Crawling
 
         public void Save(IEnumerable<CrawledShow> crawledShows)
         {
+            _crawledShows = crawledShows.ToList();
+            return;
             if (!File.Exists(DbFile))
                 CreateDatabase();
 

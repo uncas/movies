@@ -1,6 +1,6 @@
 ﻿namespace Uncas.Movies.Web.Crawling
 {
-    public class ImdbMovie
+    public class Movie
     {
         public double ImdbRating { get; set; }
         public int Year { get; set; }

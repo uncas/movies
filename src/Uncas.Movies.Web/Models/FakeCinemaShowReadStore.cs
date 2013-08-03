@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Uncas.Movies.Web.Models;
 
-namespace Uncas.Movies.Web.Controllers
+namespace Uncas.Movies.Web.Models
 {
     public class FakeCinemaShowReadStore
     {

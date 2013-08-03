@@ -6,7 +6,7 @@ namespace Uncas.Movies.Tests
     [TestFixture]
     public class ImdbCrawlerTests
     {
-        private static ImdbMovie CrawlImdb(string imdbId)
+        private static Movie CrawlImdb(string imdbId)
         {
             return new ImdbCrawler().CrawlImdb(imdbId);
         }
@@ -16,7 +16,7 @@ namespace Uncas.Movies.Tests
         {
             const string imdbId = "tt2106476";
 
-            ImdbMovie movie = CrawlImdb(imdbId);
+            Movie movie = CrawlImdb(imdbId);
 
             Assert.AreEqual("The Hunt", movie.Title);
             Assert.AreEqual(2012, movie.Year);

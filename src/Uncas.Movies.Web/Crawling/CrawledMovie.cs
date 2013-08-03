@@ -7,5 +7,10 @@
         public string Title { get; set; }
         public string OriginalTitle { get; set; }
         public string ImdbId { get; set; }
+
+        public bool NoImdb()
+        {
+            return string.IsNullOrWhiteSpace(ImdbId);
+        }
     }
 }

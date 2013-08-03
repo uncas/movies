@@ -10,19 +10,37 @@ namespace Uncas.Movies.Web.Crawling
 {
     public class CinemaCrawler
     {
+        private readonly CrawledMovieRepository _crawledMovieRepository =
+            new CrawledMovieRepository();
+
         private readonly CrawledShowRepository _crawledShowRepository =
             new CrawledShowRepository();
 
         private readonly GoogleImdbCrawler _googleImdbCrawler = new GoogleImdbCrawler();
+        private readonly ImdbCrawler _imdbCrawler = new ImdbCrawler();
 
         public void CrawlCinema()
         {
-            IEnumerable<CrawledShow> crawledShows = ExtractShows();
+            List<CrawledShow> crawledShows = ExtractShows().ToList();
             _crawledShowRepository.Save(crawledShows);
-            List<CrawledMovie> crawledMovies = GetCrawledMovies(crawledShows);
+            List<CrawledMovie> crawledMovies = GetDistinctCrawledMovies(crawledShows);
+            _crawledMovieRepository.Save(crawledMovies);
+            // TODO: Only crawl details for those without imdb ID:
             CrawlDetails(crawledMovies);
             CrawlImdbIds(crawledMovies);
-            CrawlImdbDetails(crawledMovies);
+            crawledMovies.RemoveAll(x => x.NoImdb());
+            _crawledMovieRepository.Save(crawledMovies);
+            crawledShows.RemoveAll(
+                show =>
+                crawledMovies.Any(
+                    movie =>
+                    show.CrawledMovieId == movie.CrawledMovieId &&
+                    movie.NoImdb()));
+            _crawledShowRepository.Save(crawledShows);
+            // TODO: Only crawl IMDB details for those without IMDB details:
+            IEnumerable<Movie> movies = CrawlImdbDetails(crawledMovies);
+            // TODO: Save to Movie repository
+            // TODO: Create and save to read store
 
             // TODO: Take only the following 3 days.
             // TODO: Run once per day.
@@ -117,7 +135,8 @@ namespace Uncas.Movies.Web.Crawling
             }
         }
 
-        private static List<CrawledMovie> GetCrawledMovies(IEnumerable<CrawledShow> shows)
+        private static List<CrawledMovie> GetDistinctCrawledMovies(
+            IEnumerable<CrawledShow> shows)
         {
             List<CrawledMovie> movies =
                 shows.Distinct(new CrawledShowComparer())
@@ -140,8 +159,7 @@ namespace Uncas.Movies.Web.Crawling
 
         private void CrawlImdbIds(IEnumerable<CrawledMovie> movies)
         {
-            IEnumerable<CrawledMovie> moviesWithoutImdbId =
-                movies.Where(x => string.IsNullOrWhiteSpace(x.ImdbId));
+            IEnumerable<CrawledMovie> moviesWithoutImdbId = movies.Where(x => x.NoImdb());
             foreach (CrawledMovie movie in moviesWithoutImdbId)
                 CrawlImdbId(movie);
         }
@@ -152,9 +170,10 @@ namespace Uncas.Movies.Web.Crawling
                 CrawlDetails(movie);
         }
 
-        private void CrawlImdbDetails(List<CrawledMovie> crawledMovies)
+        private IEnumerable<Movie> CrawlImdbDetails(
+            IEnumerable<CrawledMovie> crawledMovies)
         {
-            throw new NotImplementedException();
+            return crawledMovies.Select(x => _imdbCrawler.CrawlImdb(x.ImdbId));
         }
     }
 }
