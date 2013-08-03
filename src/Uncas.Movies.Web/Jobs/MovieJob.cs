@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Threading;
 using System.Threading.Tasks;
+using Uncas.Movies.Web.Crawling;
 using WebBackgrounder;
 
 namespace Uncas.Movies.Web.Jobs
 {
     public class MovieJob : Job
     {
-        public MovieJob() : base("MovieJob", TimeSpan.FromMinutes(60d))
+        private static bool _alreadyRun;
+
+        public MovieJob() : base("MovieJob", TimeSpan.FromSeconds(10d))
         {
         }
 
@@ -16,9 +18,12 @@ namespace Uncas.Movies.Web.Jobs
             return new Task(Work);
         }
 
-        private static void Work()
+        private void Work()
         {
-            Thread.Sleep(TimeSpan.FromSeconds(1d));
+            if (_alreadyRun)
+                return;
+            _alreadyRun = true;
+            new CinemaCrawler().CrawlCinema();
         }
     }
 }

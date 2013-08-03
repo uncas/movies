@@ -44,9 +44,7 @@ namespace Uncas.Movies.Web.Crawling
             _crawledShowRepository.Save(crawledShows);
             // TODO: Only crawl IMDB details for those without IMDB details:
             IEnumerable<Movie> movies = CrawlImdbDetails(crawledMovies);
-            // TODO: Save to Movie repository
             _movieRepository.Save(movies);
-            // TODO: Create and save to read store
             _cinemaShowReadStore.Save(
                 crawledShows.Select(
                     cs => MapToCinemaShowReadModel(cs, crawledMovies, movies)));

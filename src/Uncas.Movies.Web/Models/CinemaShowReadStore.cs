@@ -36,6 +36,11 @@ namespace Uncas.Movies.Web.Models
                 x.ShowTime.Date == DateTime.Now.AddDays(day).Date);
         }
 
+        public void Save(IEnumerable<CinemaShowReadModel> cinemaShows)
+        {
+            _movies = cinemaShows.ToList();
+        }
+
         private static CinemaShowReadModel GetCinemaShow(
             int id,
             string title,
@@ -53,11 +58,6 @@ namespace Uncas.Movies.Web.Models
                     ShowTime = showTime,
                     CinemaId = 1
                 };
-        }
-
-        public void Save(IEnumerable<CinemaShowReadModel> cinemaShows)
-        {
-            _movies = cinemaShows.ToList();
         }
     }
 }
