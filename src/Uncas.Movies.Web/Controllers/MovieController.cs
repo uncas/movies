@@ -11,7 +11,7 @@ namespace Uncas.Movies.Web.Controllers
         // GET api/movie
         public IEnumerable<MovieDto> GetMovies(int rating, int day)
         {
-            var cinemaShowReadStore = new FakeCinemaShowReadStore();
+            var cinemaShowReadStore = new CinemaShowReadStore();
             return cinemaShowReadStore.GetMovieShows(rating, day)
                                       .Select(MapToMovieDto);
         }

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Uncas.Movies.Web.Models;
 
 namespace Uncas.Movies.Web.Crawling
 {

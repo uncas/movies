@@ -5,11 +5,15 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
+using Uncas.Movies.Web.Models;
 
 namespace Uncas.Movies.Web.Crawling
 {
     public class CinemaCrawler
     {
+        private readonly CinemaShowReadStore _cinemaShowReadStore =
+            new CinemaShowReadStore();
+
         private readonly CrawledMovieRepository _crawledMovieRepository =
             new CrawledMovieRepository();
 
@@ -18,6 +22,7 @@ namespace Uncas.Movies.Web.Crawling
 
         private readonly GoogleImdbCrawler _googleImdbCrawler = new GoogleImdbCrawler();
         private readonly ImdbCrawler _imdbCrawler = new ImdbCrawler();
+        private readonly MovieRepository _movieRepository = new MovieRepository();
 
         public void CrawlCinema()
         {
@@ -40,10 +45,34 @@ namespace Uncas.Movies.Web.Crawling
             // TODO: Only crawl IMDB details for those without IMDB details:
             IEnumerable<Movie> movies = CrawlImdbDetails(crawledMovies);
             // TODO: Save to Movie repository
+            _movieRepository.Save(movies);
             // TODO: Create and save to read store
+            _cinemaShowReadStore.Save(
+                crawledShows.Select(
+                    cs => MapToCinemaShowReadModel(cs, crawledMovies, movies)));
 
             // TODO: Take only the following 3 days.
             // TODO: Run once per day.
+        }
+
+        private CinemaShowReadModel MapToCinemaShowReadModel(
+            CrawledShow crawledShow,
+            IEnumerable<CrawledMovie> crawledMovies,
+            IEnumerable<Movie> movies)
+        {
+            CrawledMovie crawledMovie =
+                crawledMovies.Single(x => x.CrawledMovieId == crawledShow.CrawledMovieId);
+            Movie movie = movies.Single(x => x.ImdbId == crawledMovie.ImdbId);
+            return new CinemaShowReadModel
+                {
+                    CinemaId = 1,
+                    CinemaUrl = "http://www.paradisbio.dk",
+                    ImdbRating = movie.ImdbRating,
+                    ImdbUrl = "http://www.imdb.com/titles/" + movie.ImdbId,
+                    ShowTime = crawledShow.ShowTime,
+                    ShowUrl = crawledShow.CrawledMovieUrl,
+                    Title = crawledShow.ShowTitle
+                };
         }
 
         private static IEnumerable<CrawledShow> ExtractShows(string html)

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Uncas.Movies.Web.Models
 {
-    public class FakeCinemaShowReadStore
+    public class CinemaShowReadStore
     {
         private static readonly Random Random = new Random(1);
         private static IList<CinemaShowReadModel> _movies;
@@ -17,7 +17,8 @@ namespace Uncas.Movies.Web.Models
                 {
                     _movies = new List<CinemaShowReadModel>();
                     for (int i = 0; i < 100; i++)
-                        _movies.Add(GetCinemaShow(i + 1, "Red", DateTime.Now.AddHours(i)));
+                        _movies.Add(GetCinemaShow(i + 1, "Fake movie: Red",
+                                                  DateTime.Now.AddHours(i)));
                 }
 
                 return _movies;
@@ -52,6 +53,11 @@ namespace Uncas.Movies.Web.Models
                     ShowTime = showTime,
                     CinemaId = 1
                 };
+        }
+
+        public void Save(IEnumerable<CinemaShowReadModel> cinemaShows)
+        {
+            _movies = cinemaShows.ToList();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Uncas.Movies.Web.Crawling;
+using Uncas.Movies.Web.Models;
 
 namespace Uncas.Movies.Tests
 {

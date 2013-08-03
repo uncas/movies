@@ -1,4 +1,4 @@
-﻿namespace Uncas.Movies.Web.Crawling
+﻿namespace Uncas.Movies.Web.Models
 {
     public class Movie
     {
