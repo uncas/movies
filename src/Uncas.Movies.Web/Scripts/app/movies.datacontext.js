@@ -8,8 +8,8 @@ window.moviesApp.datacontext = (function() {
 
     return datacontext;
 
-    function getMovies(moviesObservable, errorObservable, rating) {
-        return ajaxRequest("get", moviesUrl(rating))
+    function getMovies(moviesObservable, errorObservable, rating, day) {
+        return ajaxRequest("get", moviesUrl(rating, day))
             .done(getSucceeded)
             .fail(getFailed);
 
@@ -48,6 +48,8 @@ window.moviesApp.datacontext = (function() {
 
     // routes
 
-    function moviesUrl(rating) { return "/api/movie/?rating=" + rating; }
+    function moviesUrl(rating, day) {
+        return "/api/movie/?rating=" + rating + "&day=" + day;
+    }
 
 })();

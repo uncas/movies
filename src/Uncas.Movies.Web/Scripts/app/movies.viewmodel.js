@@ -4,13 +4,19 @@
     var movies = ko.observableArray();
     var error = ko.observable();
     var optionRating = ko.observable(defaultRating);
+    var optionDay = ko.observable(0);
 
     var search = function () {
-        datacontext.getMovies(movies, error, optionRating());
+        datacontext.getMovies(movies, error, optionRating(), optionDay());
     };
 
-    var chooseRating = function (rating) {
+    var selectRating = function (rating) {
         optionRating(rating);
+        search();
+    };
+
+    var selectDay = function (day) {
+        optionDay(day);
         search();
     };
 
@@ -20,7 +26,9 @@
         movies: movies,
         error: error,
         optionRating: optionRating,
-        chooseRating: chooseRating
+        selectRating: selectRating,
+        optionDay: optionDay,
+        selectDay: selectDay
     };
 
 })(ko, moviesApp.datacontext);

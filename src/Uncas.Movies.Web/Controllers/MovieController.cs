@@ -9,10 +9,10 @@ namespace Uncas.Movies.Web.Controllers
     public class MovieController : ApiController
     {
         // GET api/movie
-        public IEnumerable<MovieDto> GetMovies(int rating)
+        public IEnumerable<MovieDto> GetMovies(int rating, int day)
         {
             var cinemaShowReadStore = new FakeCinemaShowReadStore();
-            return cinemaShowReadStore.GetMovieShows(rating)
+            return cinemaShowReadStore.GetMovieShows(rating, day)
                                       .Select(MapToMovieDto);
         }
 

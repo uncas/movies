@@ -26,10 +26,14 @@ namespace Uncas.Movies.Web.Controllers
         }
 
         public IEnumerable<CinemaShowReadModel> GetMovieShows(
-            int? minimumRating)
+            int? minimumRating,
+            int day)
         {
-            return Movies.Where(x => x.ImdbRating >= minimumRating.GetValueOrDefault(5) &&
-                                     x.ShowTime >= DateTime.Now);
+            return Movies.Where(
+                x =>
+                x.ImdbRating >= minimumRating.GetValueOrDefault(5) &&
+                x.ShowTime >= DateTime.Now &&
+                x.ShowTime.Date == DateTime.Now.AddDays(day).Date);
         }
 
         private static CinemaShowReadModel GetCinemaShow(

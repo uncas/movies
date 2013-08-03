@@ -9,11 +9,13 @@
 <div id="main-content">
     <div id="options">
         Movies 
+        <button class="day" data-bind="click: function(){selectDay(0);}, css: { selectedOption: optionDay() === 0}">today</button>
+        <button class="day" data-bind="click: function(){selectDay(1);}, css: { selectedOption: optionDay() === 1}">tomorrow</button>
         with rating higher than
         @{ var ratings = new[] {0, 5, 6, 7, 8, 9}; }
         @foreach (int rating in ratings)
         {
-            <button class="rating" data-bind="click: function () { chooseRating(@rating); }, css: { selectedRating: optionRating() === @rating }">@rating</button>
+            <button class="rating" data-bind="click: function () { selectRating(@rating); }, css: { selectedOption: optionRating() === @rating}">@rating</button>
         }
     </div>
     <section id="movies" data-bind="foreach: movies, visible: movies().length > 0">
