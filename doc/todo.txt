@@ -1,3 +1,15 @@
+Features:
 X web UI
-- data crawling
+X data crawling
+XX basic crawling
+-- display more data (director, year, genres, censorRating, plotLine, actors, runTime, link to ticket reservation)
+-- remove unused properties
+-- save data to db
 - android app
+- more filtering
+- more cinemas...
+-- Odder: http://www.poweredbyintegra.dk/program.asp?bio=odder
+
+Tech:
+- Unity
+- Refactor crawler spaghetti
