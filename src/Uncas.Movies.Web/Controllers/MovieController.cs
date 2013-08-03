@@ -24,7 +24,7 @@ namespace Uncas.Movies.Web.Controllers
                     ImdbRating = x.ImdbRating.ToString("N1"),
                     ImdbUrl = x.ImdbUrl,
                     MovieId = x.MovieId,
-                    ShowLocation = x.ShowLocation,
+                    ShowLocation = "Øst for Paradis, Århus",
                     ShowTime = GetReadableTime(x.ShowTime),
                     ShowUrl = x.ShowUrl,
                     Title = x.Title

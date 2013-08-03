@@ -40,8 +40,7 @@ namespace Uncas.Movies.Web.Controllers
             int id,
             string title,
             DateTime showTime,
-            double? rating = null,
-            string showLocation = "Øst for Paradis, Århus")
+            double? rating = null)
         {
             return new CinemaShowReadModel
                 {
@@ -52,7 +51,7 @@ namespace Uncas.Movies.Web.Controllers
                     CinemaUrl = "http://www.paradisbio.dk",
                     ImdbRating = (rating ?? 5d + Random.NextDouble()*4.5d),
                     ShowTime = showTime,
-                    ShowLocation = showLocation
+                    CinemaId = 1
                 };
         }
     }
