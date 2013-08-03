@@ -23,7 +23,17 @@ namespace Uncas.Movies.Web.Jobs
             if (_alreadyRun)
                 return;
             _alreadyRun = true;
-            new CinemaCrawler().CrawlCinema();
+            Logger.Info("Starting movie job.");
+            try
+            {
+                new CinemaCrawler().CrawlCinema();
+            }
+            catch (Exception e)
+            {
+                Logger.Log(e);
+            }
+
+            Logger.Info("Completing movie job.");
         }
     }
 }

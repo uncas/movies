@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
+using Uncas.Movies.Web.Jobs;
 using Uncas.Movies.Web.Models;
 
 namespace Uncas.Movies.Web.Crawling
@@ -26,12 +27,15 @@ namespace Uncas.Movies.Web.Crawling
 
         public void CrawlCinema()
         {
+            Logger.Info("Crawling shows");
             List<CrawledShow> crawledShows = ExtractShows().ToList();
             _crawledShowRepository.Save(crawledShows);
             List<CrawledMovie> crawledMovies = GetDistinctCrawledMovies(crawledShows);
             _crawledMovieRepository.Save(crawledMovies);
             // TODO: Only crawl details for those without imdb ID:
+            Logger.Info("Crawling details");
             CrawlDetails(crawledMovies);
+            Logger.Info("Crawling imdb IDs");
             CrawlImdbIds(crawledMovies);
             crawledMovies.RemoveAll(x => x.NoImdb());
             _crawledMovieRepository.Save(crawledMovies);
@@ -43,11 +47,16 @@ namespace Uncas.Movies.Web.Crawling
                     movie.NoImdb()));
             _crawledShowRepository.Save(crawledShows);
             // TODO: Only crawl IMDB details for those without IMDB details:
+            Logger.Info("Crawling imdb details");
             IEnumerable<Movie> movies = CrawlImdbDetails(crawledMovies);
+            Logger.Info("Saving to movie repo");
             _movieRepository.Save(movies);
+            Logger.Info("Saving to read store");
             _cinemaShowReadStore.Save(
                 crawledShows.Select(
-                    cs => MapToCinemaShowReadModel(cs, crawledMovies, movies)));
+                    cs => MapToCinemaShowReadModel(cs, crawledMovies, movies))
+                            .Where(x => x != null));
+            Logger.Info("Crawling done");
 
             // TODO: Take only the following 3 days.
             // TODO: Run once per day.
@@ -59,16 +68,19 @@ namespace Uncas.Movies.Web.Crawling
             IEnumerable<Movie> movies)
         {
             CrawledMovie crawledMovie =
-                crawledMovies.Single(x => x.CrawledMovieId == crawledShow.CrawledMovieId);
+                crawledMovies.SingleOrDefault(
+                    x => x.CrawledMovieId == crawledShow.CrawledMovieId);
+            if (crawledMovie == null)
+                return null;
             Movie movie = movies.Single(x => x.ImdbId == crawledMovie.ImdbId);
             return new CinemaShowReadModel
                 {
                     CinemaId = 1,
                     CinemaUrl = "http://www.paradisbio.dk",
                     ImdbRating = movie.ImdbRating,
-                    ImdbUrl = "http://www.imdb.com/titles/" + movie.ImdbId,
+                    ImdbUrl = "http://www.imdb.com/title/" + movie.ImdbId,
                     ShowTime = crawledShow.ShowTime,
-                    ShowUrl = crawledShow.CrawledMovieUrl,
+                    ShowUrl = "http://www.paradisbio.dk/" + crawledShow.CrawledMovieUrl,
                     Title = crawledShow.ShowTitle
                 };
         }
@@ -200,7 +212,20 @@ namespace Uncas.Movies.Web.Crawling
         private IEnumerable<Movie> CrawlImdbDetails(
             IEnumerable<CrawledMovie> crawledMovies)
         {
-            return crawledMovies.Select(x => _imdbCrawler.CrawlImdb(x.ImdbId));
+            IEnumerable<string> imdbIds =
+                crawledMovies.Select(crawledMovie => crawledMovie.ImdbId)
+                             .Distinct()
+                             .OrderBy(x => x)
+                             .ToList();
+            Logger.Info("Crawling IMDB ids: " + string.Join(", ", imdbIds));
+            var result = new List<Movie>();
+            foreach (string imdbId in imdbIds)
+            {
+                Logger.Info("Crawling IMDB id " + imdbId);
+                result.Add(_imdbCrawler.CrawlImdb(imdbId));
+            }
+
+            return result;
         }
     }
 }
