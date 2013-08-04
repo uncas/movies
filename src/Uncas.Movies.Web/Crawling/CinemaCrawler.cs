@@ -25,7 +25,7 @@ namespace Uncas.Movies.Web.Crawling
         public void CrawlCinema()
         {
             Logger.Info("Crawling shows");
-            List<CrawledShow> crawledShows = ExtractShows().ToList();
+            List<CrawledShow> crawledShows = ExtractShows();
             _crawledShowRepository.Save(crawledShows);
             List<CrawledMovie> crawledMovies = GetDistinctCrawledMovies(crawledShows);
             _crawledMovieRepository.Save(crawledMovies);
@@ -45,7 +45,7 @@ namespace Uncas.Movies.Web.Crawling
             _crawledShowRepository.Save(crawledShows);
             // TODO: Only crawl IMDB details for those without IMDB details:
             Logger.Info("Crawling imdb details");
-            IEnumerable<Movie> movies = CrawlImdbDetails(crawledMovies);
+            List<Movie> movies = CrawlImdbDetails(crawledMovies);
             Logger.Info("Saving to movie repo");
             _movieRepository.Save(movies);
             Logger.Info("Saving to read store");
@@ -83,7 +83,7 @@ namespace Uncas.Movies.Web.Crawling
                 };
         }
 
-        private IEnumerable<CrawledShow> ExtractShows()
+        private List<CrawledShow> ExtractShows()
         {
             string html =
                 CrawlerUtility.Crawl("http://www.paradisbio.dk/program.asp?bio=aarhusc");
@@ -125,17 +125,20 @@ namespace Uncas.Movies.Web.Crawling
         private static List<CrawledMovie> GetDistinctCrawledMovies(
             IEnumerable<CrawledShow> shows)
         {
-            List<CrawledMovie> movies =
-                shows.Distinct(new CrawledShowComparer())
-                     .Select(
-                         x =>
-                         new CrawledMovie
-                             {
-                                 CrawledMovieId = x.CrawledMovieId,
-                                 CrawledMovieUrl = x.CrawledMovieUrl,
-                                 Title = x.ShowTitle
-                             }).OrderBy(x => x.CrawledMovieId).ToList();
-            return movies;
+            return shows.Distinct(new CrawledShowComparer())
+                        .Select(MapDistinctShowToCrawledMovie)
+                        .OrderBy(x => x.CrawledMovieId)
+                        .ToList();
+        }
+
+        private static CrawledMovie MapDistinctShowToCrawledMovie(CrawledShow x)
+        {
+            return new CrawledMovie
+                {
+                    CrawledMovieId = x.CrawledMovieId,
+                    CrawledMovieUrl = x.CrawledMovieUrl,
+                    Title = x.ShowTitle
+                };
         }
 
         private void CrawlImdbId(CrawledMovie movie)
@@ -146,7 +149,8 @@ namespace Uncas.Movies.Web.Crawling
 
         private void CrawlImdbIds(IEnumerable<CrawledMovie> movies)
         {
-            IEnumerable<CrawledMovie> moviesWithoutImdbId = movies.Where(x => x.NoImdb());
+            List<CrawledMovie> moviesWithoutImdbId =
+                movies.Where(x => x.NoImdb()).ToList();
             foreach (CrawledMovie movie in moviesWithoutImdbId)
                 CrawlImdbId(movie);
         }
@@ -157,10 +161,10 @@ namespace Uncas.Movies.Web.Crawling
                 CrawlDetails(movie);
         }
 
-        private IEnumerable<Movie> CrawlImdbDetails(
+        private List<Movie> CrawlImdbDetails(
             IEnumerable<CrawledMovie> crawledMovies)
         {
-            IEnumerable<string> imdbIds =
+            List<string> imdbIds =
                 crawledMovies.Select(crawledMovie => crawledMovie.ImdbId)
                              .Distinct()
                              .OrderBy(x => x)

@@ -10,7 +10,7 @@ namespace Uncas.Movies.Web.Crawling
 {
     public static class HtmlParser
     {
-        public static IEnumerable<CrawledShow> ExtractShows(string html)
+        public static List<CrawledShow> ExtractShows(string html)
         {
             var crawledShows = new List<CrawledShow>();
             const string dayScheduleSelector =
