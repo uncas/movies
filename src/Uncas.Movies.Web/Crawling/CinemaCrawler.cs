@@ -173,7 +173,6 @@ namespace Uncas.Movies.Web.Crawling
             var result = new List<Movie>();
             foreach (string imdbId in imdbIds)
             {
-                Logger.Info("Crawling IMDB id " + imdbId);
                 result.Add(_imdbCrawler.CrawlImdb(imdbId));
             }
 
