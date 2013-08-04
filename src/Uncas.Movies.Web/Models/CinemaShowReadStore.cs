@@ -56,6 +56,7 @@ namespace Uncas.Movies.Web.Models
                     CinemaUrl = "http://www.paradisbio.dk",
                     ImdbRating = (rating ?? 5d + Random.NextDouble()*4.5d),
                     ShowTime = showTime,
+                    MovieUrl = "http://www.paradisbio.dk",
                     CinemaId = 1
                 };
         }

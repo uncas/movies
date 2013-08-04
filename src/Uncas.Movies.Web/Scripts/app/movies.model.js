@@ -13,6 +13,7 @@
         self.imdbRating = data.imdbRating + " (imdb)";
         self.showTime = data.showTime;
         self.showLocation = data.showLocation;
+        self.movieUrl = data.movieUrl;
 
         self.toJson = function() { return ko.toJSON(self); };
     }

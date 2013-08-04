@@ -27,7 +27,8 @@ namespace Uncas.Movies.Web.Controllers
                     ShowLocation = "Øst for Paradis, Århus",
                     ShowTime = GetReadableTime(x.ShowTime),
                     ShowUrl = x.ShowUrl,
-                    Title = x.Title
+                    Title = x.Title,
+                    MovieUrl = x.MovieUrl
                 };
         }
 

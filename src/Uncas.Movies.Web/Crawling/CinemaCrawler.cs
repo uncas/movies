@@ -80,8 +80,9 @@ namespace Uncas.Movies.Web.Crawling
                     ImdbRating = movie.ImdbRating,
                     ImdbUrl = "http://www.imdb.com/title/" + movie.ImdbId,
                     ShowTime = crawledShow.ShowTime,
-                    ShowUrl = "http://www.paradisbio.dk/" + crawledShow.CrawledMovieUrl,
-                    Title = crawledShow.ShowTitle
+                    ShowUrl = "http://www.paradisbio.dk/" + crawledShow.CrawledShowUrl,
+                    Title = crawledShow.ShowTitle,
+                    MovieUrl = "http://www.paradisbio.dk/" + crawledShow.CrawledMovieUrl
                 };
         }
 
@@ -110,24 +111,30 @@ namespace Uncas.Movies.Web.Crawling
                     HtmlNode titleNode = movieNode.QuerySelector("td:nth-child(1)");
                     HtmlNode linkNode = titleNode.QuerySelector("a");
                     string title = linkNode.InnerText;
-                    string url = linkNode.Attributes["href"].Value;
+                    string movieUrl = linkNode.Attributes["href"].Value;
 
                     var idExpression = new Regex(@"(\d)+");
-                    string id = idExpression.Match(url).Value;
+                    string id = idExpression.Match(movieUrl).Value;
 
-                    string timeText = movieNode.QuerySelector("td:nth-child(3)").InnerText;
+                    HtmlNode timeNode = movieNode.QuerySelector("td:nth-child(3)");
+                    string timeText = timeNode.InnerText;
                     var timeExpression = new Regex(@"(\d)+[:](\d)+");
                     string time = timeExpression.Match(timeText).Value;
+
+                    HtmlNode showLinkNode = timeNode.QuerySelector("a");
+                    string showUrl = showLinkNode.Attributes["href"].Value;
 
                     string[] timeParts = time.Split(':');
                     int hours = int.Parse(timeParts[0]);
                     int minutes = int.Parse(timeParts[1]);
+
                     crawledShows.Add(new CrawledShow
                         {
                             ShowTime = date.AddHours(hours).AddMinutes(minutes),
                             CrawledMovieId = id,
-                            CrawledMovieUrl = url,
-                            ShowTitle = title
+                            CrawledMovieUrl = movieUrl,
+                            ShowTitle = title,
+                            CrawledShowUrl = showUrl
                         });
                 }
             }

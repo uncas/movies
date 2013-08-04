@@ -9,6 +9,10 @@ XX basic crawling
 - more filtering
 - more cinemas...
 -- Odder: http://www.poweredbyintegra.dk/program.asp?bio=odder
+-- Cinemaxx: http://www.cinemaxx.dk/aarhus/?dayFilter=2013-08-03
+-- BioCity: http://biocityaarhus.dk/program
+-- Metropol: ...
+-- Malling: ...
 
 Tech:
 - Unity

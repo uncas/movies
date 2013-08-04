@@ -10,5 +10,6 @@
         public string ImdbRating { get; set; }
         public string ShowTime { get; set; }
         public string ShowLocation { get; set; }
+        public string MovieUrl { get; set; }
     }
 }

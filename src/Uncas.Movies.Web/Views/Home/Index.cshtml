@@ -20,9 +20,12 @@
     </div>
     <section id="movies" data-bind="foreach: movies, visible: movies().length > 0">
         <article class="movie">
-            <p data-bind="text: title"></p>
+            <p class="title">
+                <a title="View movie at cinema's website"
+                   data-bind="text: title, attr: { href: movieUrl }"></a>
+            </p>
             <p class="show">
-                <a title="View at cinema's website"
+                <a title="View show at cinema's website"
                    data-bind="text: showTime, attr: { href: showUrl }, visible: showTime"></a>
             </p>
             <p class="cinema">
