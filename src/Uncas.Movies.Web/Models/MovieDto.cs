@@ -11,5 +11,8 @@
         public string ShowTime { get; set; }
         public string ShowLocation { get; set; }
         public string MovieUrl { get; set; }
+        public string Director { get; set; }
+        public string Genre { get; set; }
+        public string Rated { get; set; }
     }
 }

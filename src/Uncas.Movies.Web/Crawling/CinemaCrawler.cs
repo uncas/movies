@@ -79,7 +79,10 @@ namespace Uncas.Movies.Web.Crawling
                     ShowTime = crawledShow.ShowTime,
                     ShowUrl = "http://www.paradisbio.dk/" + crawledShow.CrawledShowUrl,
                     Title = crawledShow.ShowTitle,
-                    MovieUrl = "http://www.paradisbio.dk/" + crawledShow.CrawledMovieUrl
+                    MovieUrl = "http://www.paradisbio.dk/" + crawledShow.CrawledMovieUrl,
+                    Director = movie.Director,
+                    Genre = movie.Genre,
+                    Rated = movie.Rated
                 };
         }
 

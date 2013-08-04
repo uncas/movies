@@ -13,5 +13,8 @@ namespace Uncas.Movies.Web.Models
         public double ImdbRating { get; set; }
         public DateTime ShowTime { get; set; }
         public string MovieUrl { get; set; }
+        public string Director { get; set; }
+        public string Genre { get; set; }
+        public string Rated { get; set; }
     }
 }

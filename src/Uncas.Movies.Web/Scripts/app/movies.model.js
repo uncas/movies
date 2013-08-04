@@ -10,10 +10,13 @@
         self.imdbUrl = data.imdbUrl;
         self.showUrl = data.showUrl;
         self.cinemaUrl = data.cinemaUrl;
-        self.imdbRating = data.imdbRating + " (imdb)";
+        self.imdbRating = "IMDB: " + data.imdbRating;
         self.showTime = data.showTime;
         self.showLocation = data.showLocation;
         self.movieUrl = data.movieUrl;
+        self.director = "Director: " + data.director;
+        self.rated = "Rated: " + data.rated;
+        self.genre = "Genre: " + data.genre;
 
         self.toJson = function() { return ko.toJSON(self); };
     }

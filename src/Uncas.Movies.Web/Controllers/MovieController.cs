@@ -28,7 +28,10 @@ namespace Uncas.Movies.Web.Controllers
                     ShowTime = GetReadableTime(x.ShowTime),
                     ShowUrl = x.ShowUrl,
                     Title = x.Title,
-                    MovieUrl = x.MovieUrl
+                    MovieUrl = x.MovieUrl,
+                    Director = x.Director,
+                    Genre = x.Genre,
+                    Rated = x.Rated
                 };
         }
 
