@@ -46,6 +46,7 @@
     <Compile Include="CinemaCrawlerTests.cs" />
     <Compile Include="CrawledShowRepositoryTests.cs" />
     <Compile Include="GoogleImdbCrawlerTests.cs" />
+    <Compile Include="HtmlParserTests.cs" />
     <Compile Include="ImdbCrawlerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,6 +58,9 @@
       <Project>{3241B05D-3194-4002-AA15-0B88C51BB395}</Project>
       <Name>Uncas.Movies.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Html\ParadisbioProgram.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
