@@ -10,17 +10,22 @@ namespace Uncas.Movies.Tests
     [TestFixture]
     public class HtmlParserTests
     {
+        public static string GetResourceString(string fileName)
+        {
+            Assembly assembly = typeof (HtmlParserTests).Assembly;
+            Stream manifestResourceStream =
+                assembly.GetManifestResourceStream(
+                    string.Format("Uncas.Movies.Tests.Html.{0}", fileName));
+            if (manifestResourceStream == null)
+                Assert.Fail("Resource not found.");
+            var reader = new StreamReader(manifestResourceStream);
+            return reader.ReadToEnd();
+        }
+
         [Test]
         public void ExtractShows_ParadisBio_309()
         {
-            Assembly assembly = GetType().Assembly;
-            Stream manifestResourceStream =
-                assembly.GetManifestResourceStream(
-                    "Uncas.Movies.Tests.Html.ParadisbioProgram.html");
-            if (manifestResourceStream == null)
-                Assert.Fail("Resource not found.");
-            var htmlReader = new StreamReader(manifestResourceStream);
-            string html = htmlReader.ReadToEnd();
+            string html = GetResourceString("ParadisbioProgram.html");
 
             IEnumerable<CrawledShow> shows = HtmlParser.ExtractShows(html);
 

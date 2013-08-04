@@ -3,7 +3,7 @@ X web UI
 X data crawling
 XX basic crawling
 XX link to ticket reservation
--- display more data (director, year, genres, censorRating, plotLine, actors, runTime)
+-- display more data (-director, -year, -genres, -censorRating, plotLine, actors, -runTime)
 -- remove unused properties
 -- save data to db
 - android app

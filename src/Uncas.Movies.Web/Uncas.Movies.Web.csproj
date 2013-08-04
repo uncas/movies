@@ -234,6 +234,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Crawling\CrawledMovieRepository.cs" />
     <Compile Include="Crawling\HtmlParser.cs" />
+    <Compile Include="Crawling\ImdbParser.cs" />
     <Compile Include="Jobs\Logger.cs" />
     <Compile Include="Models\MovieRepository.cs" />
     <Compile Include="Models\CinemaShowReadStore.cs" />

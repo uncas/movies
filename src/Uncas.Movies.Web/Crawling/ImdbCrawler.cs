@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using Uncas.Movies.Web.Models;
+﻿using Uncas.Movies.Web.Models;
 
 namespace Uncas.Movies.Web.Crawling
 {
@@ -9,7 +8,7 @@ namespace Uncas.Movies.Web.Crawling
         {
             string json =
                 CrawlerUtility.Crawl(string.Format("http://www.omdbapi.com/?i={0}", imdbId));
-            return JsonConvert.DeserializeObject<Movie>(json);
+            return ImdbParser.Parse(json);
         }
     }
 }

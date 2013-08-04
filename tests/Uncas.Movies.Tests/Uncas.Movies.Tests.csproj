@@ -48,9 +48,11 @@
     <Compile Include="GoogleImdbCrawlerTests.cs" />
     <Compile Include="HtmlParserTests.cs" />
     <Compile Include="ImdbCrawlerTests.cs" />
+    <Compile Include="ImdbParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Html\imdb.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
